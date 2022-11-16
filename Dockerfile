@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cudagl:11.4-devel-ubuntu18.04
+FROM nvcr.io/nvidia/cudagl:10.2-devel-ubuntu18.04
 
 RUN apt install \
     libssl1.1 \
