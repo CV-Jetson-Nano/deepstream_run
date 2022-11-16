@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidian/nvidia-l4t-base:10.2
+FROM nvcr.io/nvidia/l4t-ml:r32.6.1-py3
 RUN apt install \
     libssl1.1 \
     libgstreamer1.0-0 \
