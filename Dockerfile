@@ -1,4 +1,5 @@
-FROM nvcr.io/nvidia/l4t-ml:r32.6.1-py3
+# FROM nvcr.io/nvidia/l4t-ml:r32.6.1-py3
+FROM nvcr.io/nvidia/l4t-pytorch:r32.7.1-pth1.10-py3
 
 RUN apt update
 RUN apt -y install libssl1.1 \
