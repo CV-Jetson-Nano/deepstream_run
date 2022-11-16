@@ -1,1 +1,2 @@
-# build the imagedocker build -t deepstream .
+# build the image
+docker build -t deepstream .
