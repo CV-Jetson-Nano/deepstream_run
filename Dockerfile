@@ -20,13 +20,12 @@ git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a \
 ./configure \
 make \
 make install
-RUN wget https://raw.githubusercontent.com/python-2022C/drf_tutorial/main/readme.md
-RUN cat readme.md
-ADD wget https://developer.nvidia.com/deepstream_sdk_v6.0.1_jetsontbz2 \
-&& tar -xvf deepstream_sdk_v6.0.1_jetsontbz2/deepstream_sdk_v6.0.1_jetsontbz2.tbz2 -C / \
-&& cd /opt/nvidia/deepstream/deepstream-6.0.1
 
-RUN ./install.sh
-RUN ldconfig
+RUN wget https://developer.nvidia.com/deepstream_sdk_v6.0.1_jetsontbz2
+# RUN tar -xvf deepstream_sdk_v6.0.1_jetsontbz2.tbz2 -C /
+# RUN cd /opt/nvidia/deepstream/deepstream-6.0.1
 
-RUN git clone --branch v1.1.0 https://github.com/NVIDIA-AI-IOT/deepstream_python_apps.git
+# RUN ./install.sh
+# RUN ldconfig
+
+# RUN git clone --branch v1.1.0 https://github.com/NVIDIA-AI-IOT/deepstream_python_apps.git
