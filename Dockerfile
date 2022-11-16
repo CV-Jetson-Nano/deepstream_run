@@ -21,10 +21,10 @@ git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a \
 make \
 make install
 
-RUN wget -O deepstream_sdk_v6.0.0_jetson.tbz2 https://developer.nvidia.com/deepstream_sdk_v6.0.0_jetsontbz2
+RUN wget https://developer.nvidia.com/deepstream_sdk_v6.0.1_jetsontbz2
 
-RUN tar -xvf deepstream_sdk_v6.0.0_jetson.tbz2 -C
-RUN cd /opt/nvidia/deepstream/deepstream-6.0
+RUN tar -xvf deepstream_sdk_v6.0.1_jetson.tbz2 -C /
+RUN cd /opt/nvidia/deepstream/deepstream-6.0.1
 
 RUN ./install.sh
 RUN ldconfig
