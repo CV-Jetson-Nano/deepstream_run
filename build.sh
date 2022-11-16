@@ -1,2 +1,1 @@
-# build the image
-sudo docker build -t deepstream .
+# build the imagedocker build -t deepstream .
