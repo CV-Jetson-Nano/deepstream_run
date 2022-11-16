@@ -41,8 +41,8 @@ RUN ldconfig
 WORKDIR /opt/nvidia/deepstream/deepstream-6.0
 RUN git clone --branch v1.1.0 https://github.com/NVIDIA-AI-IOT/deepstream_python_apps.git
 
-RUN apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 && \
-pip3 install pycairo && \
+RUN apt -y install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 
+RUN pip3 install pycairo && \
 pip3 install PyGObject && \
 pip3 install pyds-ext && \
 pip3 install pyds && \
