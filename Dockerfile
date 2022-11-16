@@ -22,6 +22,9 @@ git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a \
 make \
 make install
 
+RUN mkdir -p /opt/nvidia/deepstream/deepstream-6.0/lib
+RUN cp /usr/local/lib/librdkafka* /opt/nvidia/deepstream/deepstream-6.0/lib
+
 # Install DeepStreamSDK using tar package.
 ENV DS_REL_PKG deepstream_sdk_v6.0.1_jetson.tbz2
 
