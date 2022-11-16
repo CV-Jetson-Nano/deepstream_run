@@ -22,12 +22,20 @@ git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a \
 make \
 make install
 
-RUN curl -L -o deepstream_sdk_v6.0.1_jetsontbz2.tbz2 https://developer.nvidia.com/deepstream_sdk_v6.0.1_jetson.tbz2
+# Install DeepStreamSDK using tar package.
+ENV DS_REL_PKG deepstream_sdk_v6.0.1_jetson.tbz2
 
-RUN tar -xvf deepstream_sdk_v6.0.1_jetsontbz2.tbz2 -C /
-RUN cd /opt/nvidia/deepstream/deepstream-6.0.1
+COPY "${DS_REL_PKG}"  \
+/
 
-RUN ./install.sh
+RUN DS_REL_PKG_DIR="${DS_REL_PKG%.tbz2}" && \
+cd / && \
+tar -xvf "${DS_REL_PKG}" -C / && \
+cd /opt/nvidia/deepstream/deepstream-6.0.1 && \
+./install.sh && \
+cd / && \
+rm -rf "/${DS_REL_PKG}"
+
 RUN ldconfig
 
 RUN git clone --branch v1.1.0 https://github.com/NVIDIA-AI-IOT/deepstream_python_apps.git
