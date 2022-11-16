@@ -1,4 +1,6 @@
 FROM nvcr.io/nvidia/l4t-ml:r32.6.1-py3
+
+RUN apt update
 RUN apt -y install libssl1.1 \
     libgstreamer1.0-0 \
     gstreamer1.0-tools \
