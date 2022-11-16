@@ -1,35 +1,6 @@
-# Set L4T_VERSION, example: 10.2
-ARG L4T_VERSION
-# Use L4T base docker
-FROM nvcr.io/nvidian/nvidia-l4t-base:${L4T_VERSION}
+FROM nvcr.io/nvidia/cudagl:11.4-devel-ubuntu18.04
 
-# Install dependencies
-RUN apt-get update && \
-      DEBIAN_FRONTEND=noninteractive      apt-get install -y --no-install-recommends \
-      rsyslog git \
-           tzdata \
-           libgstrtspserver-1.0-0 \
-           libjansson4 \
-           libglib2.0 \
-           libjson-glib-1.0-0 \
-           librabbitmq4 \
-           gstreamer1.0-rtsp \
-           libcurl4-openssl-dev ca-certificates
-
-#Install libnvvpi1 and vpi1-dev
-ADD https://repo.download.nvidia.com/jetson/common/pool/main/libn/libnvvpi1/libnvvpi1_1.0.15_arm64.deb /root
-ADD https://repo.download.nvidia.com/jetson/common/pool/main/v/vpi1-dev/vpi1-dev_1.0.15_arm64.deb /root
-
-RUN dpkg -X /root/libnvvpi1_1.0.15_arm64.deb /
-
-RUN dpkg -X /root/vpi1-dev_1.0.15_arm64.deb /
-
-RUN rm /root/libnvvpi1_1.0.15_arm64.deb  \
-      /root/vpi1-dev_1.0.15_arm64.deb
-
-RUN ldconfig
-
-RUN sudo apt install \
+RUN apt install \
     libssl1.1 \
     libgstreamer1.0-0 \
     gstreamer1.0-tools \
@@ -53,25 +24,12 @@ make install
 RUN mkdir -p /opt/nvidia/deepstream/deepstream-6.0/lib
 RUN cp /usr/local/lib/librdkafka* /opt/nvidia/deepstream/deepstream-6.0/lib
 
-# Install DeepStreamSDK using tar package.
-ENV DS_REL_PKG deepstream_sdk_v6.0.0_jetson.tbz2
+RUN wget https://developer.nvidia.com/deepstream_sdk_v6.0.0_jetsontbz2
 
-COPY "${DS_REL_PKG}"  \
-/
+RUN tar -xvf deepstream_sdk_v6.0.0_jetson.tbz2 -C /
+RUN cd /opt/nvidia/deepstream/deepstream-6.0
 
-RUN DS_REL_PKG_DIR="${DS_REL_PKG%.tbz2}" && \
-cd / && \
-tar -xvf "${DS_REL_PKG}" -C / && \
-cd /opt/nvidia/deepstream/deepstream-6.0 && \
-./install.sh && \
-cd / && \
-rm -rf "/${DS_REL_PKG}"
-
+RUN ./install.sh
 RUN ldconfig
 
-CMD ["/bin/bash"]
-WORKDIR /opt/nvidia/deepstream/deepstream
-
-ENV LD_LIBRARY_PATH /usr/local/cuda-10.2/lib64
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES all
+RUN git clone --branch v1.1.0 https://github.com/NVIDIA-AI-IOT/deepstream_python_apps.git
