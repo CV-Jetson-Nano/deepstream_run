@@ -20,9 +20,9 @@ git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a \
 ./configure \
 make \
 make install
-RUN wget https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png
-RUN ls
-RUN wget https://developer.nvidia.com/deepstream_sdk_v6.0.1_jetsontbz2 \
+RUN wget https://raw.githubusercontent.com/python-2022C/drf_tutorial/main/readme.md
+RUN cat readme.md
+ADD wget https://developer.nvidia.com/deepstream_sdk_v6.0.1_jetsontbz2 \
 && tar -xvf deepstream_sdk_v6.0.1_jetsontbz2/deepstream_sdk_v6.0.1_jetsontbz2.tbz2 -C / \
 && cd /opt/nvidia/deepstream/deepstream-6.0.1
 
