@@ -16,14 +16,11 @@ RUN apt -y install libssl1.1 \
 
 RUN git clone https://github.com/edenhill/librdkafka.git
 
-RUN cd librdkafka \
+RUN cd librdkafka && \
 git reset --hard 7101c2310341ab3f4675fc565f64f0967e135a6a \
 ./configure \
 make \
 make install
-
-RUN mkdir -p /opt/nvidia/deepstream/deepstream-6.0/lib
-RUN cp /usr/local/lib/librdkafka* /opt/nvidia/deepstream/deepstream-6.0/lib
 
 # Install DeepStreamSDK using tar package.
 ENV DS_REL_PKG deepstream_sdk_v6.0.1_jetson.tbz2
@@ -41,7 +38,6 @@ rm -rf "/${DS_REL_PKG}"
 
 RUN ldconfig
 
-WORKDIR /opt/nvidia/deepstream/deepstream-6.0
 RUN git clone --branch v1.1.0 https://github.com/NVIDIA-AI-IOT/deepstream_python_apps.git
 
 RUN apt -y install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 
