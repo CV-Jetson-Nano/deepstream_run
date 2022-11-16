@@ -22,7 +22,7 @@ make \
 make install
 
 RUN wget https://developer.nvidia.com/deepstream_sdk_v6.0.1_jetsontbz2
-CMD ['ls']
+CMD "ls"
 RUN tar -xvf deepstream_sdk_v6.0.1_jetsontbz2.tbz2 -C /
 RUN cd /opt/nvidia/deepstream/deepstream-6.0.1
 
