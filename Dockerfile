@@ -1,5 +1,6 @@
 # FROM nvcr.io/nvidia/l4t-ml:r32.6.1-py3
 FROM nvcr.io/nvidia/l4t-pytorch:r32.7.1-pth1.10-py3
+WORKDIR /root
 
 RUN apt update
 RUN apt -y install libssl1.1 \
@@ -38,7 +39,6 @@ rm -rf "/${DS_REL_PKG}"
 
 RUN ldconfig
 
-WORKDIR /root
 RUN git clone --branch v1.1.0 https://github.com/NVIDIA-AI-IOT/deepstream_python_apps.git
 
 RUN apt -y install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
